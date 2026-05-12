@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minimax Strategy Advisor</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input, button { padding: 5px; margin: 5px; }
+        .card { padding: 15px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px; width: 300px; }
+        .strategy { font-weight: bold; color: green; font-size: 18px; }
+    </style>
+</head>
+<body>
+    <h2>Minimax Match Strategy Advisor</h2>
+    <div>
+        <label>Current Runs: <input type="number" id="current"></label><br>
+        <label>Target Runs: <input type="number" id="target"></label><br>
+        <label>Balls Left: <input type="number" id="balls"></label><br>
+        <label>Wickets Left: <input type="number" id="wickets"></label><br>
+        <button onclick="getStrategy()">Get Strategy</button>
+    </div>
+
+    <div id="result" class="card" style="display:none;">
+        <p>Recommended Strategy: <span id="strategy" class="strategy"></span></p>
+        <p>All Scores: <span id="scores"></span></p>
+    </div>
+
+    <script>
+        async function getStrategy() {
+            const current = document.getElementById("current").value;
+            const target = document.getElementById("target").value;
+            const balls = document.getElementById("balls").value;
+            const wickets = document.getElementById("wickets").value;
+
+            const resultDiv = document.getElementById("result");
+            const strategySpan = document.getElementById("strategy");
+            const scoresSpan = document.getElementById("scores");
+
+            try {
+                const res = await fetch("http://127.0.0.1:5000/strategy_advisor", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({current, target, balls, wickets})
+                });
+
+                const data = await res.json();
+
+                if(data.error) {
+                    strategySpan.innerText = "Error: " + data.error;
+                    scoresSpan.innerText = "";
+                } else {
+                    strategySpan.innerText = data.strategy;
+                    scoresSpan.innerText = JSON.stringify(data.scores);
+                }
+
+                resultDiv.style.display = "block";
+
+            } catch (e) {
+                strategySpan.innerText = "Backend not running or API error";
+                scoresSpan.innerText = "";
+                resultDiv.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

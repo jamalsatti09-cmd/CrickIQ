@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CrickIQ | Chase Analyzer</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h2>🏏 CrickIQ</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/chase">Chase Analyzer</a>
+        <a href="/team">Team Selector</a>
+        <a href="/venue">Venue Difficulty</a>
+    </div>
+</nav>
+
+<!-- CHASE ANALYZER -->
+<div class="chase-container">
+    <div class="chase-box">
+
+        <h2>⚡ A* Chase Analyzer + 🧠 Minimax Strategy</h2>
+
+        <!-- INPUT FORM -->
+        <div class="form-grid">
+            <input id="target" type="number" placeholder="Target Score">
+            <input id="current" type="number" placeholder="Current Score">
+            <input id="balls" type="number" placeholder="Balls Left">
+            <input id="wickets" type="number" placeholder="Wickets Left">
+        </div>
+
+        <button onclick="analyze()">Analyze Chase</button>
+        <br><br>
+        <button onclick="getMinimax()">AI Strategy Advisor</button>
+
+        <!-- STRATEGY RESULT -->
+        <div class="result-box" id="strategyBox"></div>
+
+        <!-- CHASE RESULT -->
+        <div class="result-box" id="result"></div>
+
+        <!-- 🔥 WHAT-IF SCENARIO SIMULATOR -->
+        <div class="scenario-box">
+            <h3>🎯 What-If Scenario Simulator</h3>
+
+            <button onclick="simulate('over_15')">❓ Next over goes for 15</button>
+            <button onclick="simulate('wicket')">❓ A wicket falls</button>
+            <button onclick="simulate('two_dots')">❓ Two dot balls</button>
+
+            <div class="result-box" id="simulation-result"></div>
+        </div>
+
+        <!-- 📊 LIVE MATCH ANALYTICS -->
+        <div class="simulation-box">
+            <h3>📈 Live Match Analytics</h3>
+
+            <div class="sim-controls">
+                <button onclick="start()">▶ Start</button>
+                <button onclick="pause()">⏸ Pause</button>
+                <button onclick="resume()">▶ Resume</button>
+            </div>
+
+            <canvas id="runChart"></canvas>
+            <canvas id="probChart"></canvas>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 CrickIQ | AI Cricket Intelligence</p>
+</footer>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../static/script.js"></script>
+
+</body>
+</html>

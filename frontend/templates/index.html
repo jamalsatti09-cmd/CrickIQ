@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CrickIQ | AI Cricket Intelligence</title>
+
+    <!-- Flask static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="home">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h2>🏏 CrickIQ</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/chase">Chase Analyzer</a>
+        <a href="/team">Team Selector</a>
+        <a href="/venue">Venue Difficulty</a>
+    </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>AI-Powered Cricket Decision System</h1>
+        <p>
+            Smart chase analysis, optimal playing XI selection,  
+            and data-driven cricket intelligence using Artificial Intelligence.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/chase">🔍 Analyze Chase</a>
+            <a href="/team">🧩 Build Playing XI</a>
+            <a href="/venue">📍 Venue Difficulty</a>
+        </div>
+    </div>
+</section>
+
+<!-- DASHBOARD / FEATURES -->
+<section class="features">
+
+    <h2 class="section-title">📊 AI Match Intelligence</h2>
+
+    <div class="dashboard-grid">
+
+        <!-- Chase Analyzer -->
+        <div class="dash-card">
+            <h3>⚡ Chase Analyzer (A*)</h3>
+            <p>
+                Predicts realistic chase success probability by considering
+                required runs, remaining balls, wickets, and run rate using heuristic search.
+            </p>
+            <a href="/chase">Open Module →</a>
+        </div>
+
+        <!-- Strategy Advisor -->
+        <div class="dash-card">
+            <h3>🧠 Strategy Advisor (Minimax)</h3>
+            <p>
+                Game-theory based AI recommends Aggressive, Balanced,
+                or Defensive batting strategies against bowling decisions.
+            </p>
+            <a href="/chase">Open Module →</a>
+        </div>
+
+        <!-- Team Selection -->
+        <div class="dash-card">
+            <h3>🧩 Team Selection (CSP)</h3>
+            <p>
+                Constraint Satisfaction Problem solver selects the optimal
+                Playing XI under real cricket constraints.
+            </p>
+            <a href="/team">Open Module →</a>
+        </div>
+
+        <!-- NEW: Venue Difficulty -->
+        <div class="dash-card">
+            <h3>📍 Venue-Based Chase Difficulty</h3>
+            <p>
+                Uses historical IPL match data to analyze venue-wise
+                chase success rates and classifies grounds as Easy, Medium, or Hard for chasing.
+            </p>
+            <a href="/venue">Open Module →</a>
+        </div>
+
+        <!-- Algorithms -->
+        <div class="dash-card">
+            <h3>📚 AI Algorithms Used</h3>
+            <ul>
+                <li>A* Search Algorithm</li>
+                <li>Minimax Algorithm</li>
+                <li>Constraint Satisfaction Problems (CSP)</li>
+                <li>Statistical Data Analysis (IPL Dataset)</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2025 CrickIQ | AI Cricket Intelligence</p>
+</footer>
+
+</body>
+</html>

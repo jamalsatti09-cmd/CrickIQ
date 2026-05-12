@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CrickIQ | Team Selection (CSP)</title>
+
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="team-page">
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <h2>🏏 CrickIQ</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/chase">Chase Analyzer</a>
+        <a href="/team">Team Selector</a>
+        <a href="/venue">Venue Difficulty</a>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header class="team-header">
+    <h1>🏏 <span>CrickIQ</span> – Team Selection using CSP</h1>
+    <p>AI-based Playing XI Generator (Constraint Satisfaction Problem)</p>
+</header>
+
+<!-- MAIN CONTAINER -->
+<div class="team-container">
+    <button class="primary-btn" onclick="generateTeam()">Generate Playing XI</button>
+
+    <div id="error" class="error"></div>
+
+    <div id="teamGrid" class="team-grid"></div>
+
+    <div id="summary" class="summary"></div>
+</div>
+
+<footer>
+    <p>© 2025 CrickIQ | AI Cricket Intelligence</p>
+</footer>
+
+<script>
+async function generateTeam() {
+    const grid = document.getElementById("teamGrid");
+    const errorDiv = document.getElementById("error");
+    const summary = document.getElementById("summary");
+
+    grid.innerHTML = "";
+    errorDiv.innerText = "";
+    summary.innerText = "";
+
+    try {
+        const res = await fetch("/select_team");
+        const data = await res.json();
+
+        if (data.error) {
+            errorDiv.innerText = data.error;
+            return;
+        }
+
+        data.team.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "player-card";
+            card.innerHTML = `
+                <h3>${p.name}</h3>
+                <div class="badge-row">
+                    <span class="badge role">${p.role}</span>
+                    <span class="badge ${p.country === "Overseas" ? "overseas" : "local"}">
+                        ${p.country}
+                    </span>
+                </div>
+                <p><b>Credits:</b> ${p.credits}</p>
+            `;
+            grid.appendChild(card);
+        });
+
+        summary.innerText = "Total Credits Used: " + data.total_credits;
+
+    } catch (e) {
+        errorDiv.innerText = "Backend not running or API error";
+    }
+}
+</script>
+
+</body>
+</html>

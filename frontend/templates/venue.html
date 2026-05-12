@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CrickIQ | Venue Chase Difficulty</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="venue-page">
+
+<nav class="navbar">
+    <h2>🏏 CrickIQ</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/chase">Chase Analyzer</a>
+        <a href="/team">Team Selector</a>
+        <a href="/venue">Venue Difficulty</a>
+    </div>
+</nav>
+
+<header class="venue-header">
+    <h1>📍 Venue-Based Chase Difficulty</h1>
+    <p>Historical IPL analysis of chase success across venues</p>
+</header>
+
+<div class="venue-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Venue</th>
+                <th>Matches</th>
+                <th>Chase Success %</th>
+                <th>Difficulty</th>
+            </tr>
+        </thead>
+        <tbody id="venueTable"></tbody>
+    </table>
+</div>
+
+<footer>
+    <p>© 2025 CrickIQ | AI Cricket Intelligence</p>
+</footer>
+
+<script>
+async function loadVenueData() {
+    const res = await fetch("http://127.0.0.1:5000/venue_chase_stats");
+    const data = await res.json();
+
+    const table = document.getElementById("venueTable");
+    table.innerHTML = "";
+
+    data.forEach(v => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${v.venue}</td>
+            <td>${v.matches}</td>
+            <td>${v.chase_success}%</td>
+            <td class="${v.difficulty.toLowerCase()}">${v.difficulty}</td>
+        `;
+
+        table.appendChild(row);
+    });
+}
+
+loadVenueData();
+</script>
+
+</body>
+</html>
